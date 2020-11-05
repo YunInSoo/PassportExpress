@@ -8,7 +8,7 @@ const isAuthenticated = function (req, res, next) {
 };
 
 center.get("/", (req, res) => {
-  res.render("success");
+  res.render("home");
 });
 
 center.get("/fail", (req, res) => {
@@ -26,7 +26,7 @@ center.post(
     failureFlash: true,
   }),
   (req, res) => {
-    res.redirect("/");
+    res.redirect("/list");
   }
 );
 

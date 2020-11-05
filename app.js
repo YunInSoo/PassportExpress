@@ -10,24 +10,22 @@ import authRouter from "./routes/authRouter";
 import center from "./routes/center";
 
 const app = express();
+const sessionOptions = {
+  resave: false,
+  saveUninitialized: false,
+  secret: "test",
+  cookie: {
+    httpOnly: true,
+    secure: false,
+  },
+};
 
 app.set("view engine", "pug");
 app.use(cookiePaser());
 app.use(bodyPaser.json());
 app.use(bodyPaser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
-
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: false,
-    secret: "test",
-    cookie: {
-      httpOnly: true,
-      secure: false,
-    },
-  })
-);
+app.use(session(sessionOptions));
 
 passportConfig(passport);
 app.use(passport.initialize());
